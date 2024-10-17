@@ -1,0 +1,56 @@
+#fileContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.fileElement{
+
+    border-radius: 5px;
+    border: 1px black solid;
+    height: 50px;
+    color: black;
+}
+
+#botonBuscar{
+    border-radius: 5px;
+    border: 1px black solid;
+    color: black;
+    background-color: aliceblue;
+}
+
+#optionsCont{
+    display: flex;
+}
+
+#tagsDiv{
+    width: 30px;
+    height: 30px;
+    background-color: green;
+    border: 1px black solid;
+}
+
+#tagsOverlay{
+    position: fixed;
+    width: 70%;
+    height: 60%;
+    background-color: gray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap:20px;
+}
+
+#tagsContainer{
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+
+.tagContainer{
+    display: flex;
+}
