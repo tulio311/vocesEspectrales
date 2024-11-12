@@ -1,3 +1,11 @@
+:root{
+    --magenta = "#b83256";
+}
+
+body{
+    background-color: #f1f1f1;
+}
+
 #fileContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -54,3 +62,118 @@
 .tagContainer{
     display: flex;
 }
+
+
+/* Nuevo */
+
+#descripcion{
+    /*width:800px;*/
+}
+
+#contentBox{
+    display: flex;
+    width: 100%;
+}
+
+#menuBox{
+    width:35%;
+}
+
+#listBox{
+    width: 65%;
+    margin-right: 40px;
+    border-radius: 5px;
+}
+
+.table{
+    width: 100%;
+    table-layout: fixed;   /* Ensures equal column width */
+    border-collapse: collapse; 
+    background-color: white;
+    border-radius: 5px;
+}
+.item{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    overflow: hidden;
+}
+
+.item:hover{
+    background-color: #b83256;
+}
+
+.imgCont{
+    width: 20%;
+    align-items: center;
+    display: flex;
+    padding: 0;
+    background-color: #f1f1f1;
+    /*justify-content: center;*/
+}
+.playCont{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.nameCont{
+    width: 20%;
+}
+.colCont{
+    width: 20%;
+}
+.detCont{
+    width: 20%;
+}
+.placeCont{
+    width: 10%;
+}
+.audioFile{
+    display: none;
+}
+
+
+#controls{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: black;
+}
+
+#controlsPlaceholder{
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #f1f1f1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
