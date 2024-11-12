@@ -2,6 +2,8 @@ let datos = {};
 
 let positivos = createArray(755);
 
+let number = 1;
+
 //let url = "http://localhost:8000";
 let url = "https://voces-espectrales.net";
 
@@ -175,15 +177,41 @@ setTimeout(() => {
 
 function fillPageN(N){
 
-    for(let i=1;i<51;i++){
-        document.getElementById(`name${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['Persona'];
-        //document.getElementById(`col${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'];
-        document.getElementById(`det${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['Detonante'];
-        document.getElementById(`place${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['pais'];
-        document.getElementById(`audioFile${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'];
+    const maxN = positivos.length - 1;
+    const records = 50;
 
-        console.log("../audioImages/" + datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'] + ".png");
-        document.getElementById(`imgSound${i}`).src = "../audioImages/" + datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'] + ".png";
+    for(let i=1;i<51;i++){
+
+        const index = (N-1)*records + i-1;
+        if (index <= maxN){
+            const key = positivos[index] - 1;
+
+            document.getElementById(`it${i}`).style.display = "flex";
+
+            document.getElementById(`name${i}`).innerHTML = datos[key]['Persona'];
+            //document.getElementById(`col${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'];
+            document.getElementById(`det${i}`).innerHTML = datos[key]['Detonante'];
+            document.getElementById(`place${i}`).innerHTML = datos[key]['pais'];
+            document.getElementById(`audioFile${i}`).innerHTML = datos[key]['AudioName'];
+
+            document.getElementById(`imgSound${i}`).src = "../audioImages/" + datos[key]['AudioName'] + ".png";
+
+        }else{
+
+            document.getElementById(`it${i}`).style.display = "none";
+
+            //document.getElementById(`name${i}`).innerHTML = "";
+            //document.getElementById(`col${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'];
+            //document.getElementById(`det${i}`).innerHTML = "";
+            //document.getElementById(`place${i}`).innerHTML = "";
+            //document.getElementById(`audioFile${i}`).innerHTML = "";
+
+            
+
+            //document.getElementById(`imgSound${i}`).src = "";
+
+
+        }
     }
 
 }
@@ -472,6 +500,37 @@ document.getElementById("pais").addEventListener("change",() => {
 });
 
 
+function leftArrow(){
+    console.log("a");
+    if(number != 1){
+        number -= 1;
+        fillPageN(number);
+        document.getElementById('number').innerHTML = number;
+    }
+}
+
+
+function rightArrow(){
+
+    console.log("b");
+
+    if(positivos.length == 0){
+        number = 1;
+        fillPageN(1);
+        document.getElementById('number').innerHTML = number;
+        return;
+    }
+
+    const maxN = Math.ceil(positivos.length / 50);
+
+    if(number < maxN){
+        number += 1;
+        fillPageN(number);
+        document.getElementById('number').innerHTML = number;
+    }
+}
+
+
 
 document.getElementById("ciudad").addEventListener("change",buscar);
 document.addEventListener('keydown', function(event) {
@@ -481,10 +540,15 @@ document.addEventListener('keydown', function(event) {
     }
   });
 
-function changer(){
+/*function changer(){
+
+    console.log("iniciado");
 
     const boton = document.getElementById('changer');
     const audio = document.getElementById('song');
+
+
+    console.log(audio.paused);
 
     if(audio.paused){
         audio.play();
@@ -495,9 +559,26 @@ function changer(){
     }
 
 }
+*/
 
+document.addEventListener("DOMContentLoaded", () => {
+    const boton = document.getElementById('changer');
+    //const audio = document.getElementById('song');
 
-document.getElementById('changer').addEventListener("click",changer);
+    boton.addEventListener("click", () => {
+        console.log("iniciado");
+
+        /*console.log("Audio paused:", audio.paused);  // Log paused state
+
+        if (audio.paused) {
+            audio.play();
+            boton.src = "../imagenes/pause-solid.svg";
+        } else {
+            audio.pause();
+            boton.src = "../imagenes/play-blanco.svg";
+        }*/
+    });
+});
 
 
 
