@@ -40,6 +40,12 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
         <link rel="stylesheet" href="../css/YTPlayer.css">
         <link rel="stylesheet" href="../css/demo-main/demo-main.css">
 
+        
+
+        <link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="../css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="../css/select2.min.css">
+
         <link rel="stylesheet" href="../css/myStylesArchivo.css">
         
         <!-- Google Fonts -->
@@ -157,47 +163,65 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
            
            </main>
 
-           <i class="fab fa-sistrix"></i>
 
-           <audio id="song" src="">
+           <audio id="song" src="../Audios/ADELA_LIDIV-CR-EP-231023-0290.wav">
             </audio>
 
             <div id="contentBox">
 
-            <div id="menuBox"></div>
+                <div id="menuBox"></div>
 
-            <div id="listBox">
+                    <div id="listBox">
 
-                <table class="table">
+                        <table class="table">
 
-                    <thead>
-                        <tr class="item" id="tableNames">
-                            <th class="imgCont"></th>
-                            <th class="playCont"></th>
-                            <th class="nameCont">Nombre</th>
-                            <th class="colCont">Colección</th>
-                            <th class="detCont">Detonante</th>
-                            <th class="placeCont"></th>
-                        </tr>
-                    </thead>
+                            <thead>
+                                <tr class="item" id="tableNames">
+                                    <th class="imgCont"></th>
+                                    <th class="playCont"></th>
+                                    <th class="nameCont">Nombre</th>
+                                    <th class="colCont">Colección</th>
+                                    <th class="detCont">Detonante</th>
+                                    <th class="placeCont"></th>
+                                </tr>
+                            </thead>
 
-                    <tbody id="container">
-
-
+                            <tbody id="container">
 
 
 
-                    </tbody>
-
-                </table>
-            </div>
 
 
-            </div>
+                            </tbody>
 
-            <div id="controlsPlaceholder">
- 
-            </div>
+                        </table>
+
+                        <!-- paginación -->
+                        <ul class="pagination">
+                            <!--<paginate_button page-item previous disabled -->
+                        <li class="arrow" onclick="leftArrow()">
+                            <a class="page-link arrow">
+                                <img  src="../imagenes/chevron-left-solid.svg">
+                            </a>
+                        </li>
+                        <li class="paginate_button page-item active">
+                            <div id="number" class="page-link" href="">1</div>
+                        </li>
+                        <li class="arrow" onclick="rightArrow()">
+                            <a class="page-link arrow">
+                                <img  src="../imagenes/chevron-right-solid.svg">
+                            </a>
+                        </li>
+                        </ul> 
+
+                    </div>
+
+                    
+
+
+                </div>
+
+            <div id="controlsPlaceholder"></div>
 
             <div id="controls">
 
