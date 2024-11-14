@@ -18,16 +18,16 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
         <meta name="author" content="https://themeforest.net/user/bestlooker/portfolio">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
-        <!-- Favicon -->
+        <!-- Favicon 
         <link rel="icon" href="images/favicon.png" type="image/png" sizes="any">
-        <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="images/favicon.svg" type="image/svg+xml"> -->
 
         <!-- Dashboard icons -->
-        <link rel="icon" href="/favicon.ico"/>
+        <!--  <link rel="icon" href="/favicon.ico"/>
         <link rel="manifest" href="/manifest.json"/>
-        <script defer="defer" src="/static/js/main.1a2ea396.js"></script>
-        <link href="/static/css/main.ec9a3922.css" rel="stylesheet">
-        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script defer="defer" src="/static/js/main.1a2ea396.js"></script> 
+        <link href="/static/css/main.ec9a3922.css" rel="stylesheet"> 
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>-->
 
         <!-- CSS -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -45,6 +45,9 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
         <link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="../css/responsive.bootstrap4.min.css">
         <link rel="stylesheet" href="../css/select2.min.css">
+        <link rel="stylesheet" href="../css/app.min.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/icons.min.css">
 
         <link rel="stylesheet" href="../css/myStylesArchivo.css">
         
@@ -123,16 +126,16 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
             
             <main id="main">
             
-                <!-- Header Section -->
-                <section class="page-section bg-dark-1 bg-dark-alpha-90 light-content parallax-5" style="background-image: url(../imagenes/Fondo-archivo.jpg)" id="home">
+                <!-- Header Section bg-dark-1  -->
+                <section class="page-section bg-dark-alpha-60 light-content parallax-5" style="background-image: url(../imagenes/Fondo-archivo.jpg)" id="home">
                     <div class="container position-relative pt-50">
                             
                         <!-- Section Content -->
                         <div class="text-center">
-                            <div class="row">
+                            <div class="row" id="rowTexto">
                                 
                                 <!-- Page Title -->
-                                <div class="col-md-8 offset-md-2">
+                                <div class="col-md-8 offset-md-2 m-0 w-100">
                                         
                                     <h1 class="hs-title-1 mb-20">
                                         <span class="wow charsAnimIn" data-splitting="chars">Archivo</span>
@@ -146,7 +149,9 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
                                             </p>
                                         </div>
                                     </div>
+
                                     
+                                        
 
                                </div>
                                <!-- End Page Title -->
@@ -169,7 +174,68 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
 
             <div id="contentBox">
 
-                <div id="menuBox"></div>
+                
+
+                <div id="menuBox">
+
+               
+
+                    <form class="app-search d-none d-lg-block">
+                        <div class="position-relative">
+                            <img class="lupa" src="../imagenes/sistrix-brands-solid.svg" width="15px" height="15px" alt="">
+                            <input id="buscador" type="text" class="form-control" placeholder="Buscar...">
+                            <!-- <span src="../imagenes/sistrix-brands-solid.svg" width="10px" height="10px" alt=""></span> -->
+                            <!-- <span class="bx bx-search-alt"></span> -->
+                        </div>
+                    </form>
+
+                    <label for="pais" class="mt-20 mb-10">País</label>
+                    <select class="form-control select2" id="pais" name="pais">
+                        <option value="_pais">Todos</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Peru">Perú</option>
+                        <option value="Mexico">México</option>
+                    </select>
+
+                    <label for="ciudad" class="mt-20 mb-10">Ciudad</label>
+                    <select class="form-control select2" id="ciudad" name="ciudad">
+                        <option value="_ciudad">Todas</option>
+                        <option value="Buenos Aires">Buenos Aires</option>
+                        <option value="Santa Fe">Santa Fe</option>
+                        <option value="Rosario">Rosario</option>
+                        <option value="Delta de Tigre">Delta de Tigre</option>
+                        <option value="San Jose">San José</option>
+                        <option value="Turrialba">Turrialba</option>
+                        <option value="Comunidad Alto Pacuare">Comunidad Alto Pacuare</option>
+                        <option value="Cartago">Cártago</option>
+                        <option value="Santiago">Santiago</option>
+                        <option value="Chiloe">Chiloé</option>
+                        <option value="Valparaiso">Valparaíso</option>
+                        <option value="Bogota">Bogotá</option>
+                        <option value="Bucaramanga">Bucaramanga</option>
+                        <option value="Medellin">Medellín</option>
+                        <option value="Qosqo">Qosqo</option>
+                        <option value="Lima">Lima</option>
+                        <option value="Coyoacan">Coyoacán</option>
+                    </select>
+
+                    <label for="coleccion" class="mt-20 mb-10">Colección</label>
+                    <select class="form-control select2" id="coleccion" name="coleccion">
+                        <option value="_colecciones">Todas</option>
+                        <option value="Reflexiones sobre la voz">Reflexiones sobre la voz</option>
+                        <option value="Cantos">Cantos</option>
+                        <option value="Explosiones vocales">Explosiones vocales</option>
+                        <option value="Respiraciones">Respiraciones</option>
+                        <option value="Memorias de la voz">Memorias de la voz</option>
+                        <option value="Articulaciones de la voz">Articulaciones de la voz</option>
+                        <option value="Entramados vocales">Entramados vocales</option>
+                    </select>
+                                    
+
+                </div>
 
                     <div id="listBox">
 
@@ -177,7 +243,7 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
 
                             <thead>
                                 <tr class="item" id="tableNames">
-                                    <th class="imgCont"></th>
+                                    <th class="imgCont1"></th>
                                     <th class="playCont"></th>
                                     <th class="nameCont">Nombre</th>
                                     <th class="colCont">Colección</th>
@@ -225,8 +291,17 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
 
             <div id="controls">
 
-                <img id="changer" src="../imagenes/pause-solid.svg" width="40px" height="40px">
- 
+                <p id="nameInPlayer" class="m-0"></p>
+                <p id="detInPlayer" class="m-0"></p>
+
+                <div id="changerCont">
+                    <img class="changer" id="changerPlay" src="../imagenes/play-blanco.svg" width="40px" height="40px">
+                    <img class="changer" id="changerPause" src="../imagenes/pause-solid.svg" width="40px" height="40px">
+                </div>
+
+                <div class="cuartoElemento d-flex flex-row-reverse pr-20">
+                    <p id="timeInPlayer" class="m-0">0:00</p>
+                </div>
             </div>
 
         
@@ -245,6 +320,7 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
         <!-- End JS -->     
 
         <script src="../js/fontawesome.init.js"></script>
+        <!-- <script src="../js/plugin.js"></script>-->
         
          
         <script src="../js/RealArchive.js"></script>
