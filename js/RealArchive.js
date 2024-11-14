@@ -4,11 +4,21 @@ let positivos = createArray(755);
 
 let number = 1;
 
+let startPlaying = false;
+
+let tagsSelected = [];
+
 //let url = "http://localhost:8000";
 let url = "https://voces-espectrales.net";
 
 // Generar lista
 const container = document.getElementById("container");
+
+const vars = ['AudioName','Col1','Descripcion','Col2','Fecha','Hora','Lugar','Col3','AudioData','Duracion','Col4','Nombre','Col5'];
+
+let shouldStop = false;
+
+let lastInput= 0;
 
 for (let i = 1; i <= 50; i++) {
 
@@ -86,6 +96,31 @@ for (let i = 1; i <= 50; i++) {
     placeDiv.id = `place${i}`;
     placeDiv.className = `placeCont`;
 
+    const locationIcon = document.createElement("img");
+    locationIcon.id = `locationIcon${i}`;
+    locationIcon.className = `locationIcon`;
+    locationIcon.style.width = "40%";
+    locationIcon.style.height = "40%";
+    locationIcon.style.display = "inline-block";
+    locationIcon.src = "../imagenes/location-dot-solid.svg";
+
+    const locationIconW = document.createElement("img");
+    locationIconW.id = `locationIconW${i}`;
+    locationIconW.className = `locationIconW`;
+    locationIconW.style.width = "40%";
+    locationIconW.style.height = "40%";
+    locationIconW.style.display = "none";
+    locationIconW.src = "../imagenes/location-white.svg";
+
+    const locationText = document.createElement("p");
+    locationText.id = `locationText${i}`;
+    locationText.className = `locationText`;
+    locationText.style.display = "inline-block";
+
+    placeDiv.appendChild(locationIcon);
+    placeDiv.appendChild(locationIconW);
+    placeDiv.appendChild(locationText);
+
     const audioFile = document.createElement("td");
     audioFile.id = `audioFile${i}`;
     audioFile.className = `audioFile`;
@@ -104,27 +139,59 @@ for (let i = 1; i <= 50; i++) {
 }
 //----
 
-/*
+
 $(".item").on("mouseenter", function(){
     const id = $(this).attr("id").slice(2);
-    document.getElementById("bolaPlay" + id).style.display = "flex";
+    document.getElementById("locationIcon" + id).style.display = "none";
+    document.getElementById("locationIconW" + id).style.display = "inline-block";
 });
 
 $(".item").on("mouseleave", function(){
     const id = $(this).attr("id").slice(2);
-    document.getElementById("bolaPlay" + id).style.display = "none";
+    document.getElementById("locationIcon" + id).style.display = "inline-block";
+    document.getElementById("locationIconW" + id).style.display = "none";
 });
-*/
 
-$(".playButton").on("click", function(){
-    const id = $(this).attr("id").slice(10);
+$(".item").on("dblclick", function(){
+    const id = $(this).attr("id").slice(2);
     const audioName = document.getElementById("audioFile" + id).innerHTML;
+    const name = document.getElementById("name" + id).innerHTML;
+    const det = document.getElementById("det" + id).innerHTML;
     console.log(audioName);
     const audioElement = document.getElementById("song");
     audioElement.src = "../Audios/" + audioName + ".wav";
     audioElement.play();
 
     document.getElementById("controls").style.display = "flex";
+
+    document.getElementById("nameInPlayer").innerHTML = name;
+    document.getElementById("detInPlayer").innerHTML = det;
+
+    document.getElementById("changerPause").style.display = "block";
+    document.getElementById("changerPlay").style.display = "none";
+});
+
+
+$(".playButton").on("click", function(){
+
+    startPlaying = true;
+
+    const id = $(this).attr("id").slice(10);
+    const audioName = document.getElementById("audioFile" + id).innerHTML;
+    const name = document.getElementById("name" + id).innerHTML;
+    const det = document.getElementById("det" + id).innerHTML;
+    console.log(audioName);
+    const audioElement = document.getElementById("song");
+    audioElement.src = "../Audios/" + audioName + ".wav";
+    audioElement.play();
+
+    document.getElementById("controls").style.display = "flex";
+
+    document.getElementById("nameInPlayer").innerHTML = name;
+    document.getElementById("detInPlayer").innerHTML = det;
+
+    document.getElementById("changerPause").style.display = "block";
+    document.getElementById("changerPlay").style.display = "none";
 
 });
 
@@ -164,14 +231,10 @@ async function getData() {
 // Example of calling the getData() function and then accessing the responseData
 async function main() {
     datos = await getData();
+    fillPageN(1);
 }
 
-main();  // Call the function
-
-setTimeout(() => {
-    //console.log(datos);
-    fillPageN(1);// Will show the most updated data
-}, 1000); 
+main(); 
 
 
 
@@ -191,7 +254,7 @@ function fillPageN(N){
             document.getElementById(`name${i}`).innerHTML = datos[key]['Persona'];
             //document.getElementById(`col${i}`).innerHTML = datos[positivos[(N-1)*13 + i-1] - 1]['AudioName'];
             document.getElementById(`det${i}`).innerHTML = datos[key]['Detonante'];
-            document.getElementById(`place${i}`).innerHTML = datos[key]['pais'];
+            document.getElementById(`locationText${i}`).innerHTML = datos[key]['pais'];
             document.getElementById(`audioFile${i}`).innerHTML = datos[key]['AudioName'];
 
             document.getElementById(`imgSound${i}`).src = "../audioImages/" + datos[key]['AudioName'] + ".png";
@@ -221,7 +284,7 @@ function cleanString(s){
 }
 
 function esIgual(valor,referencia){
-    if(valor==""){
+    if(valor=="Todos" || valor=="Todas"){
         return true;
     }else if(valor == referencia){
         return true;
@@ -230,9 +293,58 @@ function esIgual(valor,referencia){
     }
 }
 
-const vars = ['AudioName','Col1','Descripcion','Col2','Fecha','Hora','Lugar','Col3','AudioData','Duracion','Col4','Nombre','Col5'];
+function hasTag(audioData, tagList){
 
-let shouldStop = false;
+    //console.log(tagList);
+
+    if(tagList.length === 0){
+        return true;
+    }
+
+    const tags = audioData['Col5'].split(",");
+    const audioTags = tags.map(e => cleanString(e.trim()));
+
+    //console.log(audioTags);
+
+    for(let i=0;i<tagList.length;i++){
+        //console.log(audioTags);
+        //console.log(cleanString(tagList[i]));
+        if(audioTags.includes(cleanString(tagList[i]))){
+            return true;
+        }
+    }
+
+    return false;
+
+}
+
+function getTagsFromCol(col){
+    if(col=="Todas"){
+        return [];
+    }
+    if(col=="Reflexiones sobre la voz"){
+        return ["reflexiones sobre la voz", "autopercepciones vocales", "autobiografías vocales"];
+    }
+    if(col=="Cantos"){
+        return ["canto", "canturreo"];
+    }
+    if(col=="Explosiones vocales"){
+        return ["gritos", "delirio", "impulsos vocales"];
+    }
+    if(col=="Respiraciones"){
+        return ["respiraciones", "suspiros"];
+    }
+    if(col=="Memorias de la voz"){
+        return ["memoria profunda", "voces ancestrales", "autobiografías vocales"];
+    }
+    if(col=="Articulaciones de la voz"){
+        return ["risas", "glissandos", "voces guturales", "labios", "dientes", "saliva"];
+    }
+    if(col=="Entramados vocales"){
+        return ["entramados vocales","piezas electroacústicas"];
+    }
+}
+
 
 function buscar(){
 
@@ -246,13 +358,18 @@ function buscar(){
     const pais = document.getElementById('pais').options[selectedIndex1].text;
     const selectedIndex2 = document.getElementById('ciudad').selectedIndex;
     const ciudad = document.getElementById('ciudad').options[selectedIndex2].text;
+    const selectedIndex3 = document.getElementById('coleccion').selectedIndex;
+    const coleccion = document.getElementById('coleccion').options[selectedIndex3].text;
+
+    const tagsCol = getTagsFromCol(coleccion);
+    //console.log(tagsCol);
 
     positivos = [];
     
 
     for(let k=0;k<755;k++){
 
-        console.log(shouldStop);
+        //console.log(shouldStop);
         if(shouldStop == true){
             console.log("Finished");
             return;
@@ -266,13 +383,14 @@ function buscar(){
 
         for(let j=0;j<13;j++){
 
-            //console.log(!(bool1 && bool2));
+            //console.log(hasTag(datos[k],tagsSelected));
 
-            if(!(bool1 && bool2)){
+            if((!(bool1 && bool2) || !hasTag(datos[k],tagsCol)) || !hasTag(datos[k],tagsSelected)){
                 break;
             }
+            
 
-            if(positivos.includes(k)){
+            if(positivos.includes(k+1)){
                 break;
             }else if(cleanString(datos[k][vars[j]]).includes(texto)){
                 positivos.push(k+1);
@@ -283,41 +401,27 @@ function buscar(){
 
     }
 
+    console.log(positivos);
+
     fillPageN(1);
-
-    /*
-    for(let k=0;k<755;k++){
-
-        console.log(shouldStop);
-
-        if(shouldStop == true){
-            console.log("Finished");
-            return;
-        }
-
-        if(positivos.includes(k)){
-            document.getElementById(`e_${k+1}`).style.display = "block";
-        }else{
-            document.getElementById(`e_${k+1}`).style.display = "none";
-        }
-
-    }
-    */
+    number = 1;
+    document.getElementById('number').innerHTML = number;
 
     let end = Date.now();
-    console.log(end);
-    console.log("Elapsed time:", end - start, "ms");
+    //console.log(end);
+    //console.log("Elapsed time:", end - start, "ms");
 }
 
-
+/*
 document.getElementById("tagsDiv").addEventListener("click",()=>{
     document.getElementById('tagsContainer').style.display = "flex";
 });
+*/
 
-
-let lastInput= 0;
 
 document.getElementById('buscador').addEventListener("input",()=>{
+
+    console.log("detected");
 
     shouldStop = true;
 
@@ -341,8 +445,10 @@ document.getElementById('buscador').addEventListener("input",()=>{
 });
 
 
-document.getElementById("botonBuscar").addEventListener("click",buscar);
+//document.getElementById("botonBuscar").addEventListener("click",buscar);
 document.getElementById("pais").addEventListener("change",() => {
+
+    console.log("iniciar");
 
     buscar();
     const selectedIndex1 = document.getElementById('pais').selectedIndex;
@@ -499,6 +605,9 @@ document.getElementById("pais").addEventListener("change",() => {
 
 });
 
+document.getElementById("ciudad").addEventListener("change",buscar);
+document.getElementById("coleccion").addEventListener("change",buscar);
+
 
 function leftArrow(){
     console.log("a");
@@ -532,11 +641,34 @@ function rightArrow(){
 
 
 
-document.getElementById("ciudad").addEventListener("change",buscar);
+
+/*
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
       //console.log('Enter key pressed anywhere on the page');
       buscar(); // Optional: prevent default behavior if needed
+    }
+  });
+*/
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Space' || event.keyCode === 32) {
+
+        if(startPlaying){
+
+            const audio = document.getElementById('song');
+
+            if (audio.paused) {
+                audio.play();
+                document.getElementById("changerPause").style.display = "block";
+                document.getElementById("changerPlay").style.display = "none";
+            } else {
+                audio.pause();
+                document.getElementById("changerPause").style.display = "none";
+                document.getElementById("changerPlay").style.display = "block";
+
+            }
+        } 
     }
   });
 
@@ -562,26 +694,39 @@ document.addEventListener('keydown', function(event) {
 */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const boton = document.getElementById('changer');
-    //const audio = document.getElementById('song');
+    
 
-    boton.addEventListener("click", () => {
-        console.log("iniciado");
+    $(".changer").click( function() {
 
-        /*console.log("Audio paused:", audio.paused);  // Log paused state
+        const audio = document.getElementById('song');
+        //console.log("iniciado");
+
+        //console.log("Audio paused:", audio.paused);  // Log paused state
 
         if (audio.paused) {
             audio.play();
-            boton.src = "../imagenes/pause-solid.svg";
+            document.getElementById("changerPause").style.display = "block";
+            document.getElementById("changerPlay").style.display = "none";
         } else {
             audio.pause();
-            boton.src = "../imagenes/play-blanco.svg";
-        }*/
+            document.getElementById("changerPause").style.display = "none";
+            document.getElementById("changerPlay").style.display = "block";
+
+        }
     });
 });
 
 
+document.getElementById('song').addEventListener("timeupdate", () => {
 
+    const audio = document.getElementById("song");
+    const currentTimeDisplay = document.getElementById("timeInPlayer");
+    const currentTime = audio.currentTime;
+    const minutes = Math.floor(currentTime / 60);
+    const seconds = Math.floor(currentTime % 60).toString().padStart(2, '0');
+    
+    currentTimeDisplay.innerHTML = `${minutes}:${seconds}`;
+});
 
 
 
