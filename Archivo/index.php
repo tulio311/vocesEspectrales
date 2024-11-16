@@ -113,7 +113,7 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
                                                       
                             <li><a href="../frontPage" class="opacity-1 no-hover"><span class="link-hover-anim underline" data-link-animate="y">Inicio</span></a></li>
                             <li><a href="https://elinstantedesisifo.cc/aves/" class="opacity-1 no-hover"><span class="link-hover-anim underline" data-link-animate="y">Blog</span></a></li>
-                            <li><a href="" class="opacity-1 no-hover"><span class="link-hover-anim underline" data-link-animate="y">Archivo</span></a></li>
+                            <li><a href="../Archivo" class="opacity-1 no-hover"><span class="link-hover-anim underline" data-link-animate="y">Archivo</span></a></li>
 
                         </ul>                        
                         
@@ -233,7 +233,46 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
                         <option value="Articulaciones de la voz">Articulaciones de la voz</option>
                         <option value="Entramados vocales">Entramados vocales</option>
                     </select>
-                                    
+                                
+
+                    <div id="tags" class="w-100 d-flex flex-column align-items-center justify-content-center">
+                        <label class="mt-20 mb-10">Temas</label>
+                        <button data-bs-target="#exampleModalScrollable" data-bs-toggle="modal" id="btnTags" type="button" class="btn btn-info waves-effect waves-light">Seleccionar</button>
+                    </div>   
+
+
+                    <div id="tagsSelected">
+                        
+                    </div>
+
+
+
+                    <svg id="cruz" height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class="css-8mmkcg"><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg> 
+
+                <div class="modal fade" onclick="noFilter()" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" onclick="preventHiding(event)">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Temas</h5>
+                                <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div id="cuerpoTags" class="modal-body">
+                                
+
+
+
+
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button> -->
+                                <button id="btnFiltrar" onclick="filtrarTags()" type="button" class="btn btn-primary">Filtrar</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
 
                 </div>
 
@@ -242,7 +281,7 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
                         <table class="table">
 
                             <thead>
-                                <tr class="item" id="tableNames">
+                                <tr class="item1" id="tableNames">
                                     <th class="imgCont1"></th>
                                     <th class="playCont"></th>
                                     <th class="nameCont">Nombre</th>
@@ -267,15 +306,17 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
                             <!--<paginate_button page-item previous disabled -->
                         <li class="arrow" onclick="leftArrow()">
                             <a class="page-link arrow">
-                                <img  src="../imagenes/chevron-left-solid.svg">
+                                <img  src="../imagenes/chevron-left-solid.svg" height="10px" width="10px">
                             </a>
                         </li>
-                        <li class="paginate_button page-item active">
-                            <div id="number" class="page-link" href="">1</div>
+                        <li class="paginate_button page-item active d-flex align-items-center">
+                            <div id="number" class="page-link d-flex align-items-center justify-content-center" href="">
+                                <div>1</div>
+                            </div>
                         </li>
                         <li class="arrow" onclick="rightArrow()">
                             <a class="page-link arrow">
-                                <img  src="../imagenes/chevron-right-solid.svg">
+                                <img  src="../imagenes/chevron-right-solid.svg" height="10px" width="10px">
                             </a>
                         </li>
                         </ul> 
@@ -295,8 +336,8 @@ You can find the code of your language here - https://www.w3schools.com/tags/ref
                 <p id="detInPlayer" class="m-0"></p>
 
                 <div id="changerCont">
-                    <img class="changer" id="changerPlay" src="../imagenes/play-blanco.svg" width="40px" height="40px">
-                    <img class="changer" id="changerPause" src="../imagenes/pause-solid.svg" width="40px" height="40px">
+                    <img class="changer" id="changerPlay" src="../imagenes/play-blanco.svg" width="20px" height="20px">
+                    <img class="changer" id="changerPause" src="../imagenes/pause-solid.svg" width="20px" height="30px">
                 </div>
 
                 <div class="cuartoElemento d-flex flex-row-reverse pr-20">
