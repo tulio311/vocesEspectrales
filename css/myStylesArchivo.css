@@ -87,13 +87,14 @@ option:hover{
     border-radius: 5px;
     padding: 20px;
     height:fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
 .lupa{
     position: static;
     z-index: 5;
-    margin-left: 5.2%;
+    margin-left: 1em;
     margin-top: .75em;
 }
 
@@ -111,6 +112,25 @@ option:hover{
     position: static;
 }
 
+#btnTags{
+    border-radius: 40px;
+}
+
+#cuerpoTags{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+#cruz{
+    display: none;
+}
+
+
+
+
+/* Lista */
+
 
 
 #listBox{
@@ -119,6 +139,7 @@ option:hover{
     border-radius: 5px;
     background-color: white;
     height:fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .table{
@@ -128,7 +149,7 @@ option:hover{
     background-color: white;
     border-radius: 5px;
 }
-.item{
+.item, .item1{
     width: 100%;
     background-color: white;
     display: flex;
@@ -224,6 +245,8 @@ tbody{
     border-radius: 100%;
     border: none !important;
     background-color: #b83256;
+    width: 2em;
+    height: 2em;
 }
 .arrow{
     border: none !important;
@@ -241,12 +264,13 @@ tbody{
     height: 80px;
     background-color: black;
     z-index:10;
+    font-size: 30px;
 }
 
 #nameInPlayer{
     flex-basis: 20%;
     color: #50bdcd;
-    padding-left: 20px;
+    padding-left: 40px;
 }
 #detInPlayer{
     flex-basis: 30%;
@@ -258,7 +282,7 @@ tbody{
 .cuartoElemento{
     flex-basis: 25%;
     color:white;
-    padding-right: 20px;
+    padding-right: 40px;
     align-items: center;
 }
 
