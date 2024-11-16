@@ -11,8 +11,7 @@ let tagsSelected = [];
 //let url = "http://localhost:8000";
 let url = "https://voces-espectrales.net";
 
-// Generar lista
-const container = document.getElementById("container");
+
 
 const vars = ['AudioName','Col1','Descripcion','Col2','Fecha','Hora','Lugar','Col3','AudioData','Duracion','Col4','Nombre','Col5'];
 
@@ -20,6 +19,8 @@ let shouldStop = false;
 
 let lastInput= 0;
 
+// Generar lista
+const container = document.getElementById("container");
 for (let i = 1; i <= 50; i++) {
 
     const row = document.createElement("tr");
@@ -138,6 +139,185 @@ for (let i = 1; i <= 50; i++) {
     container.appendChild(row);
 }
 //----
+
+
+// Generar tags
+const lasTags = [
+  ["matamami",4],
+  ["argentina", 1],
+  ["presentaciones", 2],
+  ["voces maternadas", 3],
+  ["voces explosivas", 4],
+  ["voces silentes", 5],
+  ["canturreo", 6],
+  ["voces nasales", 7],
+  ["voces animales", 8],
+  ["voces maternadas. quejidos", 9],
+  ["gritos", 10],
+  ["susurros", 11],
+  ["quejidos", 12],
+  ["voces estridentes", 13],
+  ["balbuceos", 14],
+  ["risas", 15],
+  ["delirio", 16],
+  ["dúos", 17],
+  ["voces divertidas", 18],
+  ["voces pesadas", 19],
+  ["gemidos", 20],
+  ["suspiros", 21],
+  ["quebranto", 22],
+  ["Argentina", 23],
+  ["Buenos Aires", 24],
+  ["experimentación vocal", 25],
+  ["impulsos vocales", 26],
+  ["reflexiones vocales", 27],
+  ["CASo", 28],
+  ["autobiografías vocales", 1],
+  ["exploraciones vocales", 2],
+  ["multifónicos", 3],
+  ["voces graves", 4],
+  ["entramados vocales", 5],
+  ["vocalizaciones guiadas", 6],
+  ["obras improvisatorias", 7],
+  ["Músicos en Congreso", 8],
+  ["Santa Fe", 9],
+  ["auto-percepciones vocales", 10],
+  ["micropiezas vocales", 11],
+  ["respiraciones", 12],
+  ["UNR", 13],
+  ["Rosario", 14],
+  ["autopercepciones vocales", 15],
+  ["llanto", 16],
+  ["memoria profunda", 17],
+  ["voces guturales", 18],
+  ["continuo vocal", 19],
+  ["besos", 20],
+  ["silbidos", 21],
+  ["labios", 22],
+  ["diseño sonoro", 23],
+  ["Tigre", 24],
+  ["Presentaciones", 25],
+  ["secretos", 26],
+  ["piezas electroacústicas", 27],
+  ["estudios sonoros", 28],
+  ["UNTREF", 29],
+  ["reflexiones sobre la voz", 30],
+  ["Morón", 31],
+  ["Buenos Aires voces maternadas", 32],
+  ["Escuela de Artes Musicales", 33],
+  ["UCR", 34],
+  ["San José", 35],
+  ["Costa Rica", 36],
+  ["cuidar la voz", 37],
+  ["Turrialba", 38],
+  ["poesía", 39],
+  ["voces ancestrales", 40],
+  ["Escuela de Artes Plásticas", 41],
+  ["saliva", 42],
+  ["miedo", 43],
+  ["vocal painting", 44],
+  ["creaciones sonoras", 45],
+  ["Comunidad Alto Pacuare", 46],
+  ["voces infantiles", 47],
+  ["Cártago", 48],
+  ["censura", 49],
+  ["Santiago", 50],
+  ["Chile", 51],
+  ["sonidos estridentes", 52],
+  ["ceceos", 53],
+  ["balbuceo", 54],
+  ["glissandos", 55],
+  ["voces internas", 56],
+  ["continuo vocal", 1],
+  ["voces desaparecidas", 2],
+  ["canto", 3],
+  ["activaciones de archivo", 4],
+  ["Universidad Católica de Valparaíso", 5],
+  ["Valparaíso", 6],
+  ["respiración", 7],
+  ["voces rasposas", 8],
+  ["regalo sonoro", 9],
+  ["dolor profundo", 10],
+  ["suspiros. bostezo", 11],
+  ["Chiloé", 12],
+  ["exploraciones vocales voces infantiles", 13],
+  ["ternura", 14],
+  ["dientes", 15],
+  ["Pontificia Universidad Javeriana", 16],
+  ["Bogotá", 17],
+  ["Colombia", 18],
+  ["memorias profundas", 19],
+  ["tos", 20],
+  ["Universidad Industrial de Santander", 21],
+  ["Bucaramanga", 22],
+  ["sonidos rasposos", 23],
+  ["lengua", 24],
+  ["Universidad de Antioquia", 25],
+  ["Medellín", 26],
+  ["Reflexiones sobre la voz", 27],
+  ["voces animarles", 28],
+  ["La Pascasia", 29],
+  ["sonidos granulares", 30],
+  ["resonancia", 31],
+  ["reiteraciones", 32],
+  ["trémolo", 33],
+  ["voz monstruosa", 34],
+  ["instrumentos musicales", 35],
+  ["sonidos percusivos", 36],
+  ["Pumpumyachkan", 37],
+  ["Qosqo", 38],
+  ["Perú", 39],
+  ["Universidad Nacional de Música", 40],
+  ["Lima", 41],
+  ["sonidos percutidos", 42],
+  ["samples", 43],
+  ["montañas", 44],
+  ["mar", 45],
+  ["Coyoacán", 46],
+  ["Ciudad de México", 47],
+  ["México", 48],
+  ["grito ahogado", 49],
+  ["glissando", 50],
+  ["risa", 51]
+];
+
+
+
+const tagCont = document.getElementById('cuerpoTags');
+
+for (let i=0; i<lasTags.length; i++){
+    const tag = lasTags[i][0];
+    const tagN = lasTags[i][1];
+
+    const cont = document.createElement("div");
+    cont.className = "form-check mb-2";
+
+    const input = document.createElement("input");
+    input.className = "form-check-input";
+    input.type = "checkbox";
+    input.value = "checked";
+    input.id = (tag + "check").replace(" ","_");
+
+    const label = document.createElement("label");
+    label.className = "form-check-label";
+    label.innerHTML = tag;
+
+    cont.appendChild(input);
+    cont.appendChild(label);
+
+
+    const contNum = document.createElement("div");
+    contNum.id = (tag + "num").replace(" ","_");
+    contNum.innerHTML = tagN;
+
+
+    tagCont.appendChild(cont);
+    tagCont.appendChild(contNum);
+
+
+}
+
+
 
 
 $(".item").on("mouseenter", function(){
@@ -672,26 +852,6 @@ document.addEventListener('keydown', function(event) {
     }
   });
 
-/*function changer(){
-
-    console.log("iniciado");
-
-    const boton = document.getElementById('changer');
-    const audio = document.getElementById('song');
-
-
-    console.log(audio.paused);
-
-    if(audio.paused){
-        audio.play();
-        boton.src = "../imagenes/pause-solid.svg";
-    }else{
-        audio.pause();
-        boton.src = "../imagenes/play-blanco.svg";
-    }
-
-}
-*/
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -727,6 +887,117 @@ document.getElementById('song').addEventListener("timeupdate", () => {
     
     currentTimeDisplay.innerHTML = `${minutes}:${seconds}`;
 });
+
+
+
+
+async function filtrarTags(){
+
+    for(let i=0;i<lasTags.length;i++){
+
+        const tag = lasTags[i][0].replace(" ","_");
+        //console.log(tag);
+        const box = document.getElementById( tag + "check");
+        if(box.checked){
+
+            if(!tagsSelected.includes(tag)){
+                tagsSelected.push(tag);
+            }
+
+        }else{
+            tagsSelected = tagsSelected.filter(item => item !== tag);
+        }
+
+    }
+
+
+    const a = await buscar();
+
+    fillPageN(1);
+
+
+    // Agregar bloques de tags
+    const contTags = document.getElementById("tagsSelected");
+
+    const cruz = document.getElementById("cruz");
+
+    for(let i=0; i<lasTags.length; i++){
+
+        const tag = lasTags[i][0];
+
+        let ind = 0;
+
+        for(let j = 0; j<tagsSelected.length; j++){
+            if(tag == tagsSelected[j]){
+                ind = 1;
+                break;
+            }
+        }
+
+        const block = document.getElementById(tag + "Block");
+
+        if(ind){
+            if(block == null){
+                const blockCont = document.createElement("div");
+                blockCont.style.backgroundColor = "#50bdcd";
+                block.id = tag + "Block";
+
+                const text = document.createElement("p");
+                text.innerHTML = tag;
+
+                const cruzCopia = cruz.cloneNode(true);
+                cruzCopia.style.display = "inline-block";
+
+                blockCont.appendChild(tag);
+                blockCont.appendChild(cruzCopia);
+
+            }
+        }else{
+            if(block !== null){
+                block.remove()
+            }
+        }
+
+        
+    }
+
+
+    document.getElementById("btn-close").click();
+
+}
+
+
+function preventHiding(e){
+    e.stopPropagation();
+}
+
+
+function noFilter(){
+
+    for(let i=0;i<lasTags.length;i++){
+        const tag = lasTags[i][0].replace(" ","_");
+        const box = document.getElementById( tag + "check");
+        box.checked = false;
+    }
+
+    for(let i=0;i<tagsSelected.length; i++){
+        document.getElementById( tagsSelected[i] + "check").checked = true;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
